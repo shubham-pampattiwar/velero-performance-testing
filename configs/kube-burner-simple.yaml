@@ -17,11 +17,11 @@ jobs:
     cleanup: false
     objects:
       # 10k ConfigMaps
-      - objectTemplate: ../templates/configmap-simple-template.yaml
+      - objectTemplate: templates/configmap-simple-template.yaml
         replicas: 10000
       # 10k Secrets  
-      - objectTemplate: ../templates/secret-simple-template.yaml
+      - objectTemplate: templates/secret-simple-template.yaml
         replicas: 10000
       # 10k Services
-      - objectTemplate: ../templates/service-simple-template.yaml
+      - objectTemplate: templates/service-simple-template.yaml
         replicas: 10000

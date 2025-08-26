@@ -19,14 +19,12 @@ A comprehensive toolkit for testing Velero backup performance with large numbers
 
 ### Simple Test (30k objects)
 ```bash
-cd scripts
-./run-simple-test.sh
+./scripts/run-simple-test.sh
 ```
 
 ### Large Scale Test (300k objects)
 ```bash
-cd scripts  
-./run-large-scale-test.sh
+./scripts/run-large-scale-test.sh
 ```
 
 ## 📁 Repository Structure

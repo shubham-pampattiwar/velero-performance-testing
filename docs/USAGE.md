@@ -46,14 +46,9 @@ kubectl auth can-i create services
 
 ### Simple Test Workflow
 
-1. **Navigate to scripts directory:**
+1. **From repository root directory, run the test:**
    ```bash
-   cd scripts
-   ```
-
-2. **Run the test:**
-   ```bash
-   ./run-simple-test.sh
+   ./scripts/run-simple-test.sh
    ```
 
 3. **Monitor progress:**
@@ -85,8 +80,7 @@ kubectl auth can-i create services
 
 2. **Run the test:**
    ```bash
-   cd scripts
-   ./run-large-scale-test.sh
+   ./scripts/run-large-scale-test.sh
    ```
 
 3. **Monitor resource usage:**
@@ -195,7 +189,7 @@ kubectl delete services -l velero-test=performance --all-namespaces
 start_time=$(date +%s)
 
 # Run test
-./run-simple-test.sh
+./scripts/run-simple-test.sh
 
 # Calculate duration
 end_time=$(date +%s)

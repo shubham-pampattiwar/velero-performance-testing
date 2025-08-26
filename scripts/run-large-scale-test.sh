@@ -1,10 +1,14 @@
 #!/bin/bash
 
 # Script to create 300k resources using kube-burner
+# Note: Run this script from the repository root directory
 
 set -e
 
-CONFIG_FILE="../configs/kube-burner-large-scale.yaml"
+# Change to repository root directory
+cd "$(dirname "$0")/.."
+
+CONFIG_FILE="configs/kube-burner-large-scale.yaml"
 LOG_FILE="kube-burner-300k-$(date +%Y%m%d-%H%M%S).log"
 
 echo "Starting 300k resource creation using kube-burner"

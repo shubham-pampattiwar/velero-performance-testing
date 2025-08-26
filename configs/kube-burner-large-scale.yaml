@@ -20,7 +20,7 @@ jobs:
       object-type: "configmap"
     cleanup: false
     objects:
-      - objectTemplate: ../templates/configmap-template.yaml
+      - objectTemplate: templates/configmap-template.yaml
         replicas: 1000
 
   # Job 2: Create 100k Secrets across 10 namespaces
@@ -36,7 +36,7 @@ jobs:
       object-type: "secret"
     cleanup: false
     objects:
-      - objectTemplate: ../templates/secret-template.yaml
+      - objectTemplate: templates/secret-template.yaml
         replicas: 1000
 
   # Job 3: Create 100k Services across 10 namespaces
@@ -52,5 +52,5 @@ jobs:
       object-type: "service"
     cleanup: false
     objects:
-      - objectTemplate: ../templates/service-template.yaml
+      - objectTemplate: templates/service-template.yaml
         replicas: 1000

@@ -1,10 +1,14 @@
 #!/bin/bash
 
 # Script to create 30k resources using simplified kube-burner config
+# Note: Run this script from the repository root directory
 
 set -e
 
-CONFIG_FILE="../configs/kube-burner-simple.yaml"
+# Change to repository root directory
+cd "$(dirname "$0")/.."
+
+CONFIG_FILE="configs/kube-burner-simple.yaml"
 LOG_FILE="kube-burner-simple-$(date +%Y%m%d-%H%M%S).log"
 
 echo "Starting 30k resource creation using simplified kube-burner config"
