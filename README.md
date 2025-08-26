@@ -9,6 +9,17 @@ A comprehensive toolkit for testing Velero backup performance with large numbers
 - **Bottleneck Analysis**: Reproduce scenarios where backup speed slows significantly after initial objects
 - **Environment Validation**: Verify Velero performance in different cluster configurations
 
+## ⚡ Why This Approach?
+
+This toolkit uses **[kube-burner](https://github.com/cloud-bulldozer/kube-burner)** - the industry standard for Kubernetes performance testing. Unlike simple kubectl loops or custom scripts, kube-burner provides:
+
+- **2-3 hours** vs 10+ hours for 300k objects
+- **Intelligent rate limiting** to prevent API server overwhelming
+- **Built-in monitoring** and progress tracking
+- **Battle-tested** reliability at enterprise scale
+
+*See the [detailed comparison](#-why-kube-burner) below for alternatives and technical details.*
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -117,6 +128,62 @@ kubectl delete namespace velero-perf-test
 # Large scale test cleanup
 kubectl delete namespaces -l velero-test=performance
 ```
+
+## 🔧 Why Kube-burner?
+
+### The Challenge
+Creating 300k Kubernetes objects efficiently is not trivial. Traditional approaches have significant limitations:
+
+| Approach | Speed | Concurrency | Monitoring | Cluster Safety |
+|----------|--------|-------------|------------|----------------|
+| **Sequential kubectl** | 10+ hours | None | Manual | Poor |
+| **Parallel kubectl** | 3-4 hours | Basic | Manual | Risk of overwhelming API |
+| **Custom scripts** | Variable | Complex to implement | Custom code needed | Depends on implementation |
+| **Kube-burner** | 2-3 hours | Smart rate limiting | Built-in | Respects API limits |
+
+### Kube-burner Advantages
+
+- **🚀 Built for Scale**: Specifically designed for large-scale Kubernetes object creation
+- **⚡ Intelligent Concurrency**: Handles parallelism with automatic rate limiting and backoff
+- **📊 Built-in Monitoring**: Progress tracking, performance metrics, and detailed logging
+- **🛡️ Cluster-Safe**: Respects API server limits and implements proper backoff strategies
+- **🎯 Template System**: Easy object variation through YAML templates
+- **📈 Industry Standard**: Used by Kubernetes performance teams and backup tool vendors
+- **🔄 Error Resilience**: Automatic retries and graceful error handling
+
+### Alternative Approaches
+
+**Simple kubectl (Not Recommended)**
+```bash
+# Would take 10+ hours with no concurrency
+for i in {1..300000}; do
+  kubectl create configmap "cm-$i" --from-literal=data="test"
+done
+```
+
+**Parallel kubectl (Limited)**
+```bash
+# Better but lacks rate limiting and monitoring
+seq 1 300000 | xargs -P 10 -I {} kubectl create configmap "cm-{}" --from-literal=data="test"
+```
+
+**Custom Implementation**
+Creating a custom solution would require implementing:
+- Kubernetes client libraries and authentication
+- Intelligent rate limiting and backoff
+- Comprehensive error handling and retries
+- Progress monitoring and logging
+- Template rendering system
+- Resource cleanup capabilities
+
+This represents hundreds of lines of complex code versus kube-burner's simple YAML configuration.
+
+### For Velero Testing Specifically
+
+- **Realistic Load Patterns**: Creates load similar to real applications
+- **Backup Tool Compatible**: Generates standard Kubernetes objects
+- **Performance Testing Standard**: Widely used for testing backup solutions
+- **Proven at Scale**: Battle-tested in enterprise environments
 
 ## 🛠️ Customization
 
