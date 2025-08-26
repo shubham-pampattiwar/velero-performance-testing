@@ -13,7 +13,7 @@ brew install kube-burner
 
 **Linux:**
 ```bash
-curl -L https://github.com/cloud-bulldozer/kube-burner/releases/latest/download/kube-burner-linux-x86_64.tar.gz | tar xz
+curl -L https://github.com/kube-burner/kube-burner/releases/latest/download/kube-burner-linux-x86_64.tar.gz | tar xz
 sudo mv kube-burner /usr/local/bin/
 ```
 

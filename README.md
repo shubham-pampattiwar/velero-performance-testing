@@ -11,7 +11,7 @@ A comprehensive toolkit for testing Velero backup performance with large numbers
 
 ## ⚡ Why This Approach?
 
-This toolkit uses **[kube-burner](https://github.com/cloud-bulldozer/kube-burner)** - the industry standard for Kubernetes performance testing. Unlike simple kubectl loops or custom scripts, kube-burner provides:
+This toolkit uses **[kube-burner](https://github.com/kube-burner/kube-burner)** - the industry standard for Kubernetes performance testing. Unlike simple kubectl loops or custom scripts, kube-burner provides:
 
 - **2-3 hours** vs 10+ hours for 300k objects
 - **Intelligent rate limiting** to prevent API server overwhelming
@@ -24,7 +24,7 @@ This toolkit uses **[kube-burner](https://github.com/cloud-bulldozer/kube-burner
 
 ### Prerequisites
 - Kubernetes cluster (OpenShift/OCP supported)
-- [kube-burner](https://github.com/cloud-bulldozer/kube-burner) installed
+- [kube-burner](https://github.com/kube-burner/kube-burner) installed
 - kubectl configured for your cluster
 - Sufficient cluster resources for object creation
 
@@ -244,7 +244,7 @@ Create new templates in the `templates/` directory following the existing patter
 
 - **[Velero Setup Guide](docs/VELERO-SETUP.md)** - Complete Velero installation and testing guide
 - **[Detailed Usage Guide](docs/USAGE.md)** - Comprehensive usage instructions
-- **[Kube-burner Documentation](https://github.com/cloud-bulldozer/kube-burner)** - Object creation tool
+- **[Kube-burner Documentation](https://github.com/kube-burner/kube-burner)** - Object creation tool
 - **[Velero Documentation](https://velero.io/docs/)** - Official Velero documentation
 
 ## 🤝 Contributing
@@ -262,7 +262,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🔗 Related Resources
 
 - [Velero GitHub Repository](https://github.com/vmware-tanzu/velero)
-- [Kube-burner GitHub Repository](https://github.com/cloud-bulldozer/kube-burner)
+- [Kube-burner GitHub Repository](https://github.com/kube-burner/kube-burner)
 - [Kubernetes Performance Testing](https://kubernetes.io/docs/concepts/cluster-administration/system-logs/)
 
 ---

@@ -19,7 +19,7 @@ echo "Start time: $(date)"
 # Check if kube-burner is available
 if ! command -v kube-burner &> /dev/null; then
     echo "ERROR: kube-burner not found. Please install it first:"
-    echo "https://github.com/cloud-bulldozer/kube-burner/releases"
+    echo "https://github.com/kube-burner/kube-burner/releases"
     exit 1
 fi
 
