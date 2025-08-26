@@ -29,6 +29,19 @@ if [ ! -f "$CONFIG_FILE" ]; then
     exit 1
 fi
 
+# Create namespaces first
+echo "Creating namespaces for large-scale test..."
+for i in {0..9}; do
+    NS_NAME="velero-perf-test-$i"
+    echo "  Creating namespace: $NS_NAME"
+    kubectl create namespace "$NS_NAME" --dry-run=client -o yaml | kubectl apply -f -
+    kubectl label namespace "$NS_NAME" velero-test=performance --overwrite
+done
+
+echo ""
+echo "All namespaces created successfully!"
+echo ""
+
 # Run kube-burner
 echo "Running kube-burner to create resources..."
 kube-burner init -c "$CONFIG_FILE" --log-level=info 2>&1 | tee "$LOG_FILE"
