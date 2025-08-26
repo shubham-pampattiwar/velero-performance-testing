@@ -103,6 +103,22 @@ kubectl auth can-i create services
 
 ## Troubleshooting
 
+### Expected Behavior (Not Issues!)
+
+#### Client-Side Throttling Logs
+**What you'll see:**
+```
+I0826 14:23:58.805236   71944 request.go:700] Waited for 8.474643292s due to client-side throttling, not priority and fairness, request: POST:https://api.example.com:6443/api/v1/namespaces/velero-perf-test-7/configmaps?timeout=1m0s
+```
+
+**This is NORMAL and GOOD!** These logs indicate:
+- ✅ Kube-burner is protecting your API server from overload
+- ✅ Rate limiting (QPS/burst: 20/50) is working as designed
+- ✅ Your test is progressing safely and sustainably
+- ✅ No action needed - just patience!
+
+**Don't worry about these logs** - they're a feature, not a problem. The test will complete successfully.
+
 ### Common Issues
 
 #### 1. Resource Limits

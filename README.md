@@ -42,6 +42,12 @@ This toolkit uses **[kube-burner](https://github.com/kube-burner/kube-burner)** 
 ```
 *Warning: This is where things get spicy! 🌶️ Make sure your cluster has had its coffee first.*
 
+**💡 Expected Behavior:** You'll see lots of throttling logs like:
+```
+Waited for 8.474643292s due to client-side throttling, not priority and fairness
+```
+**This is totally normal and good!** It means kube-burner is protecting your API server from overload. *(Don't panic, it's a feature, not a bug!)* ✨
+
 ## 🚀 Complete Performance Testing Workflow *(The Full Monty)*
 
 ### 1. Setup Velero — *"Getting the Band Together"*
