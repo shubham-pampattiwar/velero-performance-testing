@@ -39,7 +39,11 @@ A comprehensive toolkit for testing Velero backup performance with large numbers
 ├── scripts/                    # Execution scripts
 │   ├── run-simple-test.sh          # 30k objects runner
 │   ├── run-large-scale-test.sh     # 300k objects runner
-│   └── create-objects-kubectl.sh   # Alternative kubectl approach
+│   ├── create-objects-kubectl.sh   # Alternative kubectl approach
+│   ├── cleanup-simple.sh           # Clean up 30k objects
+│   ├── cleanup-large-scale.sh      # Clean up 300k objects
+│   ├── cleanup-all.sh              # Clean up all test resources
+│   └── status.sh                   # Check current test status
 └── docs/                      # Documentation
     └── USAGE.md               # Detailed usage guide
 ```
@@ -60,8 +64,15 @@ A comprehensive toolkit for testing Velero backup performance with large numbers
 
 All objects are labeled with `velero-test: "performance"` for easy backup targeting.
 
-## 📊 Verification Commands
+## 📊 Status and Verification
 
+### Quick Status Check
+```bash
+# Check current test status
+./scripts/status.sh
+```
+
+### Manual Verification Commands
 ```bash
 # Check object counts by type
 kubectl get configmaps -n velero-perf-test -l velero-test=performance --no-headers | wc -l
@@ -86,14 +97,24 @@ Based on performance testing, you should observe:
 
 ## 🧹 Cleanup
 
+### Quick Cleanup
+```bash
+# Remove simple test (30k objects)
+./scripts/cleanup-simple.sh
+
+# Remove large-scale test (300k objects) 
+./scripts/cleanup-large-scale.sh
+
+# Remove ALL test resources
+./scripts/cleanup-all.sh
+```
+
+### Manual Cleanup
 ```bash
 # Simple test cleanup
 kubectl delete namespace velero-perf-test
 
-# Large scale test cleanup  
-kubectl get namespaces -l velero-test=performance --no-headers | awk '{print $1}' | xargs kubectl delete namespace
-
-# Alternative: Delete by label
+# Large scale test cleanup
 kubectl delete namespaces -l velero-test=performance
 ```
 
