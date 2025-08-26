@@ -38,6 +38,35 @@ This toolkit uses **[kube-burner](https://github.com/cloud-bulldozer/kube-burner
 ./scripts/run-large-scale-test.sh
 ```
 
+## 🚀 Complete Performance Testing Workflow
+
+### 1. Setup Velero
+```bash
+./velero/install-velero.sh
+```
+
+### 2. Create Test Resources
+```bash
+./scripts/run-simple-test.sh      # 30k objects
+# OR
+./scripts/run-large-scale-test.sh # 300k objects
+```
+
+### 3. Run Backup Performance Test
+```bash
+./velero/backup-performance-test.sh
+```
+
+### 4. Analyze Performance
+```bash
+./velero/analyze-performance.sh <backup-name>
+```
+
+### 5. Test Restore Performance
+```bash
+./velero/restore-performance-test.sh <backup-name>
+```
+
 ## 📁 Repository Structure
 
 ```
@@ -55,8 +84,14 @@ This toolkit uses **[kube-burner](https://github.com/cloud-bulldozer/kube-burner
 │   ├── cleanup-large-scale.sh      # Clean up 300k objects
 │   ├── cleanup-all.sh              # Clean up all test resources
 │   └── status.sh                   # Check current test status
+├── velero/                     # Velero backup/restore scripts
+│   ├── install-velero.sh           # Install Velero with multiple providers
+│   ├── backup-performance-test.sh  # Run backup performance tests
+│   ├── restore-performance-test.sh # Test restore performance
+│   └── analyze-performance.sh      # Generate performance analysis
 └── docs/                      # Documentation
-    └── USAGE.md               # Detailed usage guide
+    ├── USAGE.md                    # Detailed usage guide
+    └── VELERO-SETUP.md             # Velero setup and testing guide
 ```
 
 ## 🔧 Configuration Details
@@ -207,9 +242,10 @@ Create new templates in the `templates/` directory following the existing patter
 
 ## 📚 Documentation
 
-- [Detailed Usage Guide](docs/USAGE.md)
-- [Kube-burner Documentation](https://github.com/cloud-bulldozer/kube-burner)
-- [Velero Documentation](https://velero.io/docs/)
+- **[Velero Setup Guide](docs/VELERO-SETUP.md)** - Complete Velero installation and testing guide
+- **[Detailed Usage Guide](docs/USAGE.md)** - Comprehensive usage instructions
+- **[Kube-burner Documentation](https://github.com/cloud-bulldozer/kube-burner)** - Object creation tool
+- **[Velero Documentation](https://velero.io/docs/)** - Official Velero documentation
 
 ## 🤝 Contributing
 
