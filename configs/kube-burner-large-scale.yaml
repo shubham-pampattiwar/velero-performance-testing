@@ -4,10 +4,9 @@
 global:
   measurements:
     - name: podLatency
-    - name: resourceUsage
 
 jobs:
-  # Job 1: Create 100k ConfigMaps across 10 namespaces  
+  # Job 1: Create 100k ConfigMaps across 10 namespaces (10k each)  
   - name: configmaps-job
     jobType: create
     qps: 20
@@ -21,9 +20,9 @@ jobs:
     cleanup: false
     objects:
       - objectTemplate: templates/configmap-template.yaml
-        replicas: 1000
+        replicas: 10000
 
-  # Job 2: Create 100k Secrets across 10 namespaces
+  # Job 2: Create 100k Secrets across 10 namespaces (10k each)
   - name: secrets-job
     jobType: create
     qps: 20
@@ -37,9 +36,9 @@ jobs:
     cleanup: false
     objects:
       - objectTemplate: templates/secret-template.yaml
-        replicas: 1000
+        replicas: 10000
 
-  # Job 3: Create 100k Services across 10 namespaces
+  # Job 3: Create 100k Services across 10 namespaces (10k each)
   - name: services-job
     jobType: create
     qps: 20
@@ -53,4 +52,4 @@ jobs:
     cleanup: false
     objects:
       - objectTemplate: templates/service-template.yaml
-        replicas: 1000
+        replicas: 10000
