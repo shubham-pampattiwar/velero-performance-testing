@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-{{.Iteration}}-{{.Replica}}
+  namespace: perf-test-velero-9169
+  labels:
+    kube-burner-job: create-300k-objects
+    kube-burner-index: "{{.Iteration}}"
+    kube-burner-uuid: "{{.Iteration}}-{{.Replica}}"
+    velero-test: "issue-9169"
+    object-type: "pvc"
+    test-batch: "{{.Iteration}}"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-{{.Iteration}}-{{.Replica}}
+  namespace: velero-perf-test-{{.Iteration}}
+  labels:
+    kube-burner-job: create-300k-objects
+    kube-burner-index: "{{.Iteration}}"
+    kube-burner-uuid: "{{.Iteration}}-{{.Replica}}"
+    velero-test: "performance"
+    object-type: "configmap"
+    test-batch: "{{.Iteration}}"
+data:
+  iteration: "{{.Iteration}}"
+  replica: "{{.Replica}}"
+  timestamp: "$(date)"
+  uuid: "{{.Iteration}}-{{.Replica}}"
+  large-data: |
+    This is test data for Velero performance testing.
+    Object: configmap-{{.Iteration}}-{{.Replica}}
+    Generated at: iteration-{{.Iteration}}
+    Purpose: Performance testing for large-scale backups
+    Expected behavior: Fast initial processing (~5k objects) then slowdown to ~3 objects/sec
+    Total target: 300,000 objects
+    Test scenario: Kubernetes ConfigMap objects with realistic data payload
+    Environment: OpenShift/OADP with Velero backend
+    
+    Additional padding data to simulate realistic object sizes:
+    padding-line-1: "data-content-1-{{.Iteration}}-{{.Replica}}"
+    padding-line-2: "data-content-2-{{.Iteration}}-{{.Replica}}"
+    padding-line-3: "data-content-3-{{.Iteration}}-{{.Replica}}"
+    padding-line-4: "data-content-4-{{.Iteration}}-{{.Replica}}"
+    padding-line-5: "data-content-5-{{.Iteration}}-{{.Replica}}"
+    padding-line-6: "data-content-6-{{.Iteration}}-{{.Replica}}"
+    padding-line-7: "data-content-7-{{.Iteration}}-{{.Replica}}"
+    padding-line-8: "data-content-8-{{.Iteration}}-{{.Replica}}"
+    padding-line-9: "data-content-9-{{.Iteration}}-{{.Replica}}"
+    padding-line-10: "data-content-10-{{.Iteration}}-{{.Replica}}"

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-{{.Iteration}}-{{.Replica}}
+  namespace: perf-test-velero-9169
+  labels:
+    kube-burner-job: create-300k-objects
+    kube-burner-index: "{{.Iteration}}"
+    kube-burner-uuid: "{{.Iteration}}-{{.Replica}}"
+    velero-test: "issue-9169"
+    object-type: "deployment"
+    test-batch: "{{.Iteration}}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app-{{.Iteration}}-{{.Replica}}
+  template:
+    metadata:
+      labels:
+        app: test-app-{{.Iteration}}-{{.Replica}}
+        kube-burner-job: create-300k-objects
+        velero-test: "issue-9169"
+    spec:
+      containers:
+      - name: test-container
+        image: registry.k8s.io/pause:3.9
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        env:
+        - name: ITERATION
+          value: "{{.Iteration}}"
+        - name: REPLICA
+          value: "{{.Replica}}"
+        - name: TIMESTAMP
+          value: "$(date)"

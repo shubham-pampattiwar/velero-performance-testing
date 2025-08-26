@@ -1,0 +1,27 @@
+# Simplified kube-burner configuration for Velero performance testing
+# Creates 30,000 objects in a single namespace for easy testing
+
+global:
+  measurements:
+    - name: podLatency
+
+jobs:
+  # Create all objects in one namespace
+  - name: velero-perf-test
+    jobType: create
+    qps: 20
+    burst: 50
+    jobIterations: 1
+    namespacedIterations: false
+    namespace: velero-perf-test
+    cleanup: false
+    objects:
+      # 10k ConfigMaps
+      - objectTemplate: ../templates/configmap-simple-template.yaml
+        replicas: 10000
+      # 10k Secrets  
+      - objectTemplate: ../templates/secret-simple-template.yaml
+        replicas: 10000
+      # 10k Services
+      - objectTemplate: ../templates/service-simple-template.yaml
+        replicas: 10000

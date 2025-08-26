@@ -1,0 +1,56 @@
+# Kube-burner configuration for large-scale Velero performance testing
+# Creates 300,000 objects across multiple namespaces to test backup performance
+
+global:
+  measurements:
+    - name: podLatency
+    - name: resourceUsage
+
+jobs:
+  # Job 1: Create 100k ConfigMaps across 10 namespaces  
+  - name: configmaps-job
+    jobType: create
+    qps: 20
+    burst: 50
+    jobIterations: 10
+    namespacedIterations: true
+    namespace: velero-perf-test
+    namespaceLabels:
+      velero-test: "performance"
+      object-type: "configmap"
+    cleanup: false
+    objects:
+      - objectTemplate: ../templates/configmap-template.yaml
+        replicas: 1000
+
+  # Job 2: Create 100k Secrets across 10 namespaces
+  - name: secrets-job
+    jobType: create
+    qps: 20
+    burst: 50
+    jobIterations: 10
+    namespacedIterations: true
+    namespace: velero-perf-test
+    namespaceLabels:
+      velero-test: "performance"
+      object-type: "secret"
+    cleanup: false
+    objects:
+      - objectTemplate: ../templates/secret-template.yaml
+        replicas: 1000
+
+  # Job 3: Create 100k Services across 10 namespaces
+  - name: services-job
+    jobType: create
+    qps: 20
+    burst: 50
+    jobIterations: 10
+    namespacedIterations: true
+    namespace: velero-perf-test
+    namespaceLabels:
+      velero-test: "performance"
+      object-type: "service"
+    cleanup: false
+    objects:
+      - objectTemplate: ../templates/service-template.yaml
+        replicas: 1000

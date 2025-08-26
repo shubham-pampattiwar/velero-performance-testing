@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-{{.Replica}}
+  namespace: velero-perf-test
+  labels:
+    velero-test: "performance"
+    object-type: "service"
+    kube-burner-job: "velero-perf-test"
+spec:
+  selector:
+    app: test-app-{{.Replica}}
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+    name: http
+  type: ClusterIP
