@@ -1,0 +1,23 @@
+# Kube-burner configuration for Services only - sequential execution
+# Creates 50,000 Services across 10 namespaces (5k each)
+
+global:
+  measurements:
+    - name: podLatency
+
+jobs:
+  # Job 1: Create 50k Services across 10 namespaces (5k each)
+  - name: services-job
+    jobType: create
+    qps: 20
+    burst: 50
+    jobIterations: 10
+    namespacedIterations: true
+    namespace: velero-perf-test
+    namespaceLabels:
+      velero-test: "performance"
+      object-type: "service"
+    cleanup: false
+    objects:
+      - objectTemplate: templates/service-template.yaml
+        replicas: 5000

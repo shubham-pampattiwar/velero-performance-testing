@@ -1,0 +1,23 @@
+# Kube-burner configuration for ConfigMaps only - sequential execution
+# Creates 50,000 ConfigMaps across 10 namespaces (5k each)
+
+global:
+  measurements:
+    - name: podLatency
+
+jobs:
+  # Job 1: Create 50k ConfigMaps across 10 namespaces (5k each)  
+  - name: configmaps-job
+    jobType: create
+    qps: 20
+    burst: 50
+    jobIterations: 10
+    namespacedIterations: true
+    namespace: velero-perf-test
+    namespaceLabels:
+      velero-test: "performance"
+      object-type: "configmap"
+    cleanup: false
+    objects:
+      - objectTemplate: templates/configmap-template.yaml
+        replicas: 5000

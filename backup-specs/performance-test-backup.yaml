@@ -1,0 +1,26 @@
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: performance-test-113k-objects
+  namespace: openshift-adp
+  labels:
+    performance-test: "113k-objects"
+    test-run: "issue-9169-reproduction"
+spec:
+  # Include all resources with the velero-test=performance label
+  labelSelector:
+    matchLabels:
+      velero-test: performance
+  
+  # Include all namespaces - the objects are already filtered by label
+  includedNamespaces:
+  - "*"
+  
+  # Configure for performance testing
+  ttl: 24h0m0s
+  
+  # Exclude volume snapshots to focus on API object performance
+  snapshotVolumes: false
+  
+  # Disable filesystem backup to focus on API objects
+  defaultVolumesToFsBackup: false
